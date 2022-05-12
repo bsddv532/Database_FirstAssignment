@@ -1,0 +1,126 @@
+config          0.000GB
+local           0.000GB
+pizza           0.000GB
+> use Human_Resource
+switched to db Human_Resource
+> show collection
+uncaught exception: Error: don't know how to show [collection] :
+shellHelper.show@src/mongo/shell/utils.js:1211:11
+shellHelper@src/mongo/shell/utils.js:838:15
+@(shellhelp2):1:1
+> show collections
+employee
+> db.employee.insertMany({name: "Deepak Pradhan", salary: 40000, experience: 2, graduated: 2020},{name: "Vikash", salary: 50000, experience: 2, graduated: 2019},{name: "Jaggi", salary: 45000, experience: 4, graduated: 2021},{name: "Ram", salary: 30000, experience: 1, graduated: 2020},{name: "Shubham", salary: 80000, experience: 4, graduated: 2019})
+uncaught exception: TypeError: documents.map is not a function :
+DBCollection.prototype.insertMany@src/mongo/shell/crud_api.js:307:17
+@(shell):1:1
+> db.employee.insertMany({name: "Deepak Pradhan", salary: 40000, experience: 2, graduated: 2020},{name: "Vikash", salary: 50000, experience: 2, graduated: 2019},{name: "Jaggi", salary: 45000, experience: 4, graduated: 2021},{name: "Ram", salary: 30000, experience: 1, graduated: 2020},{name: "Shubham", salary: 80000, experience: 4, graduated: 2019}])
+uncaught exception: SyntaxError: missing ) after argument list :
+@(shell):1:347
+> db.employee.insertMany([{name: "Deepak Pradhan", salary: 40000, experience: 2, graduated: 2020},{name: "Vikash", salary: 50000, experience: 2, graduated: 2019},{name: "Jaggi", salary: 45000, experience: 4, graduated: 2021},{name: "Ram", salary: 30000, experience: 1, graduated: 2020},{name: "Shubham", salary: 80000, experience: 4, graduated: 2019}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("627cfe40d1c71eda073048a7"),
+                ObjectId("627cfe40d1c71eda073048a8"),
+                ObjectId("627cfe40d1c71eda073048a9"),
+                ObjectId("627cfe40d1c71eda073048aa"),
+                ObjectId("627cfe40d1c71eda073048ab")
+        ]
+}
+> db.employee.find().pretty()
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a7"),
+        "name" : "Deepak Pradhan",
+        "salary" : 40000,
+        "experience" : 2,
+        "graduated" : 2020
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a8"),
+        "name" : "Vikash",
+        "salary" : 50000,
+        "experience" : 2,
+        "graduated" : 2019
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a9"),
+        "name" : "Jaggi",
+        "salary" : 45000,
+        "experience" : 4,
+        "graduated" : 2021
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048aa"),
+        "name" : "Ram",
+        "salary" : 30000,
+        "experience" : 1,
+        "graduated" : 2020
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048ab"),
+        "name" : "Shubham",
+        "salary" : 80000,
+        "experience" : 4,
+        "graduated" : 2019
+}
+> db.employee.find({salary: {$gt: 30000}}).pretty()
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a7"),
+        "name" : "Deepak Pradhan",
+        "salary" : 40000,
+        "experience" : 2,
+        "graduated" : 2020
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a8"),
+        "name" : "Vikash",
+        "salary" : 50000,
+        "experience" : 2,
+        "graduated" : 2019
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a9"),
+        "name" : "Jaggi",
+        "salary" : 45000,
+        "experience" : 4,
+        "graduated" : 2021
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048ab"),
+        "name" : "Shubham",
+        "salary" : 80000,
+        "experience" : 4,
+        "graduated" : 2019
+}
+> db.employee.find({experience: {$gt: 2}}).pretty()
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a9"),
+        "name" : "Jaggi",
+        "salary" : 45000,
+        "experience" : 4,
+        "graduated" : 2021
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048ab"),
+        "name" : "Shubham",
+        "salary" : 80000,
+        "experience" : 4,
+        "graduated" : 2019
+}
+> db.employee.find({ $and:[{graduated: {$gt: 2019}}, {experience: {$gt: 1}}]}).pretty()
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a7"),
+        "name" : "Deepak Pradhan",
+        "salary" : 40000,
+        "experience" : 2,
+        "graduated" : 2020
+}
+{
+        "_id" : ObjectId("627cfe40d1c71eda073048a9"),
+        "name" : "Jaggi",
+        "salary" : 45000,
+        "experience" : 4,
+        "graduated" : 2021
+}
+>
